@@ -1,46 +1,35 @@
 class Solution {
 public:
-    bool isopening(char c)
+    bool isopening(char ch)
     {
-        if(c == '(' || c == '{' || c == '[')
+        if(ch == '(' || ch == '{' || ch == '[')
             return true;
-        
         return false;
     }
-    bool isclosing(char f, char c)
+    bool isclosing(char ch1, char ch2)
     {
-        if(f == '(' && c == ')' || f == '{' && c == '}' || f == '[' && c == ']')
+        if(ch1 == '(' && ch2 == ')' || ch1 == '{' && ch2 == '}' || ch1 == '[' && ch2 == ']')
             return true;
-        
         return false;
     }
-    bool isValid(string s)
-    {
-        stack<char> ch;
-        char curr;
+    bool isValid(string s) {
+        stack<char> st;
         for(int i = 0; i < s.length(); i++)
         {
-            curr = s[i];
-            if(isopening(curr))
-            {
-                ch.push(curr);
-            }
+            if(isopening(s[i]))
+                st.push(s[i]);
             else
             {
-                if(ch.empty())
-                {
+                if(st.empty())
                     return false;
-                }
-                else if(!isclosing(ch.top(), curr))
-                {
+                else if(!isclosing(st.top(), s[i]))
                     return false;
-                }
                 else
-                {
-                    ch.pop();
-                }
+                    st.pop();
             }
         }
-        return ch.empty();        
+        if(st.empty())
+            return true;
+        return false;
     }
 };
