@@ -1,28 +1,27 @@
 class Solution {
 public:
+    char tolowercase(char ch)
+    {
+        return (ch >= 'A' && ch <= 'Z') ? ch + ('a' - 'A') : ch;
+    }
     bool isPalindrome(string s) {
-        string str;
-
-        for (char ch : s) {
-            if (isalnum(ch)) {
-                str += tolower(ch);
-            }
+        string ans;
+        for(char ch: s)
+        {
+            if(isalnum(ch))
+                ans += ch;
         }
-
-        int l=0,h=s.size()-1;
-        transform(s.begin(),s.end(),s.begin(),::tolower);
-        while(l<=h){
-            if(!isalnum(s[l]))
+        int l = 0;
+        int r = ans.length() - 1;
+        
+        while(l<r)
+        {
+            if(tolowercase(ans[l]) != tolowercase(ans[r]))
+                return 0;
             l++;
-            else if(!isalnum(s[h]))
-            h--;
-            else if((s[l])!=(s[h]))
-            return 0;
-            else{
-                l++; h--;
-            }
-            
+            r--;
         }
+        
         return 1;
     }
 };
