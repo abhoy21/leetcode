@@ -9,11 +9,9 @@ public:
             {
                 if(!stck.empty())
                     stck.pop();
-                else
-                    continue;
+                continue;
             }
-            else
-                stck.push(str[i]);
+            stck.push(str[i]);
         }
         str = "";
         while(!stck.empty())
