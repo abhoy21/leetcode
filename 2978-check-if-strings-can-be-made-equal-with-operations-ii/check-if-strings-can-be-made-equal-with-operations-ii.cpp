@@ -5,7 +5,7 @@ public:
 
         for(int i = 0; i < s1.length(); i++)
         {
-            if(i%2 == 0)
+            if(i%2 != 0)
             {
                 odd[s1[i] - 'a']++;
                 odd[s2[i] - 'a']--;
