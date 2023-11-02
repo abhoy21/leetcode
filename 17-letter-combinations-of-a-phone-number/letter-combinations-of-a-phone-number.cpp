@@ -1,19 +1,22 @@
 class Solution {
 public:
-    void solve(int cnt, string ds, string digits, map<char,string> &hsh, vector<string> &ans){
-        if(cnt == digits.size()){
-            ans.push_back(ds);
+    void func(string digits, map<char, string>& hsh, string temp, vector<string>& ans, int index) {
+        if (index == digits.size()) {
+            ans.push_back(temp);
             return;
         }
-        string str = hsh[digits[cnt]];
-        for(int i = 0; i < str.length(); i++){
-            ds += str[i];
-            solve(cnt + 1, ds, digits, hsh, ans);
-            ds.pop_back();
+
+        string str = hsh[digits[index]];
+        for (int i = 0; i < str.length(); i++) {
+            temp.push_back(str[i]);
+            func(digits, hsh, temp, ans, index + 1);
+            temp.pop_back();
         }
     }
+
     vector<string> letterCombinations(string digits) {
         vector<string> ans;
+        if (digits.size() == 0) return ans;
         map<char, string> hsh;
         hsh['2'] = "abc";
         hsh['3'] = "def";
@@ -23,11 +26,10 @@ public:
         hsh['7'] = "pqrs";
         hsh['8'] = "tuv";
         hsh['9'] = "wxyz";
-        int cnt = 0;
-        string ds = "";
-        if(digits.size() == 0) return ans;
-        solve(cnt, ds, digits, hsh, ans);
-        
-          return ans; 
+        string temp = "";
+
+        func(digits, hsh, temp, ans, 0);
+
+        return ans;
     }
 };
