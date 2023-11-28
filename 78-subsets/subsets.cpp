@@ -2,21 +2,19 @@ class Solution {
 public:
     vector<vector<int>> ans;
     vector<int> v;
-    void makesubsets(vector<int>& nums, int i)
-    {
-        if(i == nums.size())
-        {
+    void func(vector<int>& nums, int ind){
+        if(ind == nums.size()){
             ans.push_back(v);
             return;
         }
-        
-        v.push_back(nums[i]);
-        makesubsets(nums, i+1);
+
+        v.push_back(nums[ind]);
+        func(nums, ind+1);
         v.pop_back();
-        makesubsets(nums, i+1);
+        func(nums, ind + 1);
     }
     vector<vector<int>> subsets(vector<int>& nums) {
-        makesubsets(nums,0);
+        func(nums, 0);
 
         return ans;
     }
