@@ -13,12 +13,11 @@ public:
     ListNode* swapPairs(ListNode* head) {
         ListNode* first = head;
 
-        ListNode* dummy = new ListNode(0);
+        ListNode* dummy = new ListNode();
         ListNode* prev = dummy;
         prev->next = head;
 
-        while(first && first->next)
-        {
+        while(first && first->next){
             ListNode* second = first->next;
             ListNode* future = first->next->next;
             second->next = first;
