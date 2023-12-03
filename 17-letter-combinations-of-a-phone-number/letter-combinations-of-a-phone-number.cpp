@@ -1,19 +1,19 @@
 class Solution {
 public:
-    void func(string digits, map<char, string>& hsh, string temp, vector<string>& ans, int index) {
-        if (index == digits.size()) {
+    void func(string digits,map<char, string>& hsh, vector<string>& ans, string temp, int idx){
+        if(idx == digits.size()){
             ans.push_back(temp);
             return;
         }
 
-        string str = hsh[digits[index]];
-        for (int i = 0; i < str.length(); i++) {
-            temp.push_back(str[i]);
-            func(digits, hsh, temp, ans, index + 1);
+        string s = hsh[digits[idx]];
+
+        for(int i = 0; i < s.size(); i++){
+            temp.push_back(s[i]);
+            func(digits, hsh, ans, temp, idx+1);
             temp.pop_back();
         }
     }
-
     vector<string> letterCombinations(string digits) {
         vector<string> ans;
         if (digits.size() == 0) return ans;
@@ -28,7 +28,7 @@ public:
         hsh['9'] = "wxyz";
         string temp = "";
 
-        func(digits, hsh, temp, ans, 0);
+        func(digits, hsh, ans, temp, 0);
 
         return ans;
     }
