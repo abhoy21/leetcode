@@ -10,25 +10,27 @@ public:
     }
     
     string get(string key, int timestamp) {
+        int ans = -1;
         if(mp.find(key) == mp.end())
             return "";
         else if(mp[key][0].first > timestamp)
             return "";
         else{
             int low = 0, high = mp[key].size() - 1;
-            int ans = -1;
-            while(low <= high)
-            {
-                int mid = low + (high - low)/2;
-                int ts = mp[key][mid].first;
-                if(ts > timestamp)
+            
+            while(low <= high){
+                int mid = low + (high - low) / 2;
+                if(mp[key][mid].first > timestamp)
                     high = mid - 1;
-                else
-                    low = mid + 1, ans = mid;
+                else{
+                    low = mid+1;
+                    ans = mid;
+                }
             }
-
-            return ans == -1 ? "" : mp[key][ans].second;
         }
+
+        return ans == -1 ? "" : mp[key][ans].second;
+        
     }
 };
 
