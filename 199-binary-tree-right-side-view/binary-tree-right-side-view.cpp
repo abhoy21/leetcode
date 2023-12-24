@@ -11,28 +11,18 @@
  */
 class Solution {
 public:
-    vector<int> rightSideView(TreeNode* root) {
-        vector<int> ans;
-        queue<TreeNode*> q;
+    void func(TreeNode* root, int level, vector<int>& right){
         if(root == nullptr)
-            return ans;
-        q.push(root);
+            return;
+        if(right.size() == level)
+            right.push_back(root->val);
+        func(root->right, level+1, right);
+        func(root->left, level+1, right);
+    }
+    vector<int> rightSideView(TreeNode* root) {
+        vector<int> right;
+        func(root, 0, right);
 
-        while(!q.empty())
-        {
-            int n = q.size();
-            vector<int> helper;
-            for(int i = 0; i < n; i++)
-            {
-                TreeNode* node = q.front();
-                helper.push_back(node->val);
-                q.pop();
-                if(node->left) q.push(node->left);
-                if(node->right) q.push(node->right);
-            }
-            ans.push_back(helper[n-1]);
-        }
-
-        return ans;
+        return right;
     }
 };
