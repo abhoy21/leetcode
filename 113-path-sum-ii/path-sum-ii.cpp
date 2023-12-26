@@ -14,17 +14,15 @@ public:
     void func(TreeNode* root, int targetSum, vector<int>& temp, vector<vector<int>>& ans){
         temp.push_back(root->val);
         targetSum -= root->val;
-
         if(root->left == nullptr && root->right == nullptr){
             if(targetSum == 0)
                 ans.push_back(temp);
-
         }
-
         if(root->left)
             func(root->left, targetSum, temp, ans);
         if(root->right)
             func(root->right, targetSum, temp, ans);
+        
         temp.pop_back();
     }
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
