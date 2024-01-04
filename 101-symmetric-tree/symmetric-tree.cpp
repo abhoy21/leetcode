@@ -11,12 +11,11 @@
  */
 class Solution {
 public:
-    bool func(TreeNode* left, TreeNode* right){
-        if(left == nullptr && right == nullptr)
+    bool func(TreeNode* left, TreeNode* right) {
+        if(!left && !right)
             return true;
-        else if(left == nullptr || right == nullptr || left->val != right->val)
+        if(!left || !right || left->val != right->val)
             return false;
-        
         return func(left->left, right->right) && func(left->right, right->left);
     }
     bool isSymmetric(TreeNode* root) {
