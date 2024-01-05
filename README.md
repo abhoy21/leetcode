@@ -1,29 +1,25 @@
+# LeetCode Solutions in C++
 
-This structure allows you to quickly locate and review solutions for a specific problem in the language C++.
-
-## Language used!
-
-Solutions are provided in the programming language, including but not limited to:
-
-- C++
-
-
-Feel free to contribute solutions in other languages or improve existing ones. Consistency in coding style is appreciated.
+This repository contains solutions to various LeetCode questions implemented in C++. Feel free to contribute solutions in other languages or improve the existing ones. Consistency in coding style is appreciated.
 
 ## Contributing
 
 If you'd like to contribute by adding new solutions, optimizing existing ones, or suggesting improvements, please follow these guidelines:
 
-1. Fork the repository.
-2. Create a new branch for your changes.
-3. Ensure your code follows the established file structure and naming conventions.
-4. Write clear and concise comments in your code.
-5. Test your solutions thoroughly.
-6. Submit a pull request.
+1. **Fork the repository.**
+2. **Create a new branch for your changes.**
+3. **Ensure your code follows the established file structure and naming conventions.**
 
+   - Each solution should be in its own file named appropriately (e.g., `problem123.cpp`).
+   - Keep the file structure organized and easy to navigate.
 
-Happy coding!
+4. **Write clear and concise comments in your code.**
+5. **Test your solutions thoroughly.**
+6. **Submit a pull request.**
 
+## How to Use
 
-# leetcode
-Collection of LeetCode questions to ace the coding interview! - Created using [LeetHub](https://github.com/QasimWani/LeetHub)
+Clone the repository to your local machine:
+
+```bash
+git clone https://github.com/your-username/leetcode-cpp-solutions.git
