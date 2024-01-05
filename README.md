@@ -25,7 +25,7 @@ git clone https://github.com/abhoy21/leetcode.git
 cd leetcode
 # Example: View the solution for the Longest Increasing Subsequence problem
 cat 300\.\ Longest\ Increasing\ Subsequence.cpp
-
+```
 
 Happy coding!
 
