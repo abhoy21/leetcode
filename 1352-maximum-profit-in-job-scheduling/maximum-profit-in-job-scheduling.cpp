@@ -24,7 +24,8 @@ public:
         if (t[curr] != -1)
             return t[curr];
 
-        int take = 0, skip;
+        int take = 0;
+        int skip;
         int next = getNextIndex(array, array[curr][1]);
 
         take = array[curr][2] + solve(next, array);
@@ -46,10 +47,7 @@ public:
         }
 
         // Sort the jobs based on their end times
-        sort(array.begin(), array.end(), [](const vector<int>& a, const vector<int>& b) {
-            return a[0] < b[0];
-        });
-
+        sort(array.begin(), array.end());
         return solve(0, array);
     }
 };
