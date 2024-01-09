@@ -11,24 +11,22 @@
  */
 class Solution {
 public:
-    void DFS(TreeNode* root, vector<int>& arr)
-    {
-        if(root == NULL)
+    void func(TreeNode* root, vector<int> &v) {
+        if(!root)
             return;
-
-        if(root->left == NULL && root->right == NULL)
-        {
-            arr.push_back(root->val);
+        if(!root->left && !root->right) {
+            v.push_back(root->val);
             return;
         }
-        DFS(root->left, arr);
-        DFS(root->right, arr);
+        func(root->left, v);
+        func(root->right, v);
+
     }
     bool leafSimilar(TreeNode* root1, TreeNode* root2) {
-        vector<int> v1, v2;
-        DFS(root1,v1);
-        DFS(root2, v2);
+        vector<int> r1, r2;
+        func(root1, r1);
+        func(root2, r2);
 
-        return v1 == v2;
+        return r1 == r2;
     }
 };
