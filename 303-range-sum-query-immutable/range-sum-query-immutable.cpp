@@ -4,19 +4,18 @@ public:
     vector<int> dp;
     NumArray(vector<int>& nums) {
         this->nums = nums;
-        int n = nums.size();
-        dp.resize(n);
-        prefixSum(nums);
+        dp.resize(nums.size());
+        prefixsum(nums);
     }
 
-    void prefixSum(vector<int> &nums) {
+    void prefixsum(vector<int> & nums) {
         for(int i = 0; i < nums.size(); i++) {
             (i == 0) ? dp[i] = nums[i] : dp[i] = nums[i] + dp[i-1];
         }
     }
     
     int sumRange(int left, int right) {
-        return left - 1 >= 0 ? dp[right] - dp[left-1] : dp[right];
+        return left - 1 < 0 ? dp[right] : dp[right] - dp[left - 1];
     }
 };
 
