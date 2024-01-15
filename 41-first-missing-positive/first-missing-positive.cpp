@@ -5,6 +5,7 @@ public:
             int element = nums[i];
             while(element >= 1 && element <= nums.size() && nums[element - 1] != element){
                 swap(nums[element - 1], element);
+          
             }
         }
 
