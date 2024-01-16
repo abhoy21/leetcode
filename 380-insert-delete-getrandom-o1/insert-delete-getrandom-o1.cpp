@@ -7,23 +7,23 @@ public:
     }
     
     bool insert(int val) {
-        if(mp.find(val)==mp.end())
-        {
+        if(mp.find(val) == mp.end()){
             mp[val] = v.size();
             v.push_back(val);
             return true;
         }
         return false;
+        
     }
     
     bool remove(int val) {
-        if(mp.find(val) != mp.end())
-        {
+        if(mp.find(val) != mp.end()){
             int idx = mp[val];
             int last = v.back();
             v[idx] = last;
             v.pop_back();
             mp[last] = idx;
+            mp.erase(val);
             mp.erase(val);
             return true;
         }
@@ -31,8 +31,8 @@ public:
     }
     
     int getRandom() {
-        int r = rand() % v.size();
-        return v[r];
+        int random = rand() % v.size();
+        return v[random];
     }
 };
 
