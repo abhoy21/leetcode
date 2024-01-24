@@ -21,7 +21,7 @@ public:
 
         if (!root->left && !root->right) {
             int oddCount = 0;
-            for (int i = 1; i < pseudo.size(); i++) {
+            for (int i = 0; i < pseudo.size(); i++) {
                 if (pseudo[i] % 2 != 0)
                     oddCount++;
             }
