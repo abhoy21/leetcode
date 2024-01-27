@@ -16,7 +16,7 @@ public:
                 // Calculate the total number of arrays with i elements and j inverse pairs
                 dp[i][j] = (dp[i - 1][j] + dp[i][j - 1]) % mod;
 
-                // If j - i is greater than or equal to 0, consider the contribution from arrays with (i-1)(j-i) elements as theanswer will only have the value that was stored in (i-1)(j-i)th position
+                // If j - i is greater than or equal to 0, consider the contribution from arrays with (i-1)(j-i) elements as theanswer will only have the value that was stored in (i-1)(j-i)th position and the + mod is being done to ensure that only non-negative values are considered as dp[i][j] might be less than dp[i-1][j-i]
                 if (j - i >= 0)
                     dp[i][j] = (dp[i][j] - dp[i - 1][j - i] + mod ) % mod;
             }
