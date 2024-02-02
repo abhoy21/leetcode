@@ -1,34 +1,51 @@
 class Solution {
-public:
-    void calc(vector<vector<char>>& grid, int i, int j)
-    {
+private:
+    void func(int i, int j, vector<vector<char>>& grid,
+              vector<vector<int>>& vis, int n, int m) {
+        vis[i][j] = 1;
+        queue<pair<int, int>> q;
+        q.push({i, j});
 
-        if(i < 0 || j < 0 || i >=grid.size() || j >= grid[0].size())
-            return;
-        
-        if(grid[i][j] == '0')
-            return;
-        grid[i][j] = '0';
+        while (!q.empty()) {
+            int row, col;
+            tie(row, col) = q.front();
+            q.pop();
 
-        calc(grid, i+1, j);
-        calc(grid, i, j+1);
-        calc(grid, i-1, j);
-        calc(grid, i, j-1);
+            // Check for horizontal and vertical movements only
+            int dr[] = {-1, 0, 1, 0};
+            int dc[] = {0, -1, 0, 1};
+
+            for (int d = 0; d < 4; d++) {
+                int nrow = row + dr[d];
+                int ncol = col + dc[d];
+                if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m &&
+                    grid[nrow][ncol] == '1' && vis[nrow][ncol] == 0) {
+                    vis[nrow][ncol] = 1;
+                    q.push({nrow, ncol});
+                }
+            }
+        }
     }
+
+public:
     int numIslands(vector<vector<char>>& grid) {
-        int cnt = 0;;
-        for(int i = 0; i < grid.size(); i++)
-        {
-            for(int j = 0; j < grid[0].size(); j++)
-            {
-                if(grid[i][j] == '1')
-                {
-                    calc(grid,i,j);
-                    cnt++;
+        if (grid.empty() || grid[0].empty()) {
+            return 0;
+        }
+
+        int n = grid.size();
+        int m = grid[0].size();
+        vector<vector<int>> vis(n, vector<int>(m, 0));
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (grid[i][j] == '1' && vis[i][j] == 0) {
+                    ans++;
+                    func(i, j, grid, vis, n, m);
                 }
             }
         }
 
-        return cnt;
+        return ans;
     }
 };
