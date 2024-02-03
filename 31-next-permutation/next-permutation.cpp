@@ -1,28 +1,25 @@
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
+        int ind = -1;
         int n = nums.size();
-        int infp = -1; 
-        for (int i = n - 1; i > 0; i--) {
-            if (nums[i] > nums[i - 1]) {
-                infp = i - 1;
+        for(int i = n-2; i >= 0; i--){
+            if(nums[i] < nums[i+1]){
+                ind = i;
                 break;
             }
         }
 
-        if (infp == -1) {
+        if(ind == -1)
             reverse(nums.begin(), nums.end());
-        }
-         else {
-
-            int smallestLargerIdx = infp + 1;
-            for (int i = infp + 2; i < n; i++) {
-                if (nums[i] > nums[infp] && nums[i] <= nums[smallestLargerIdx]) {
-                    smallestLargerIdx = i;
+        else {
+            for(int i = n-1; i > ind; i--){
+                if(nums[i] > nums[ind]){
+                    swap(nums[i], nums[ind]);
+                    break;
                 }
             }
-            swap(nums[infp], nums[smallestLargerIdx]);
-            reverse(nums.begin() + infp + 1, nums.end());
+            reverse(nums.begin() + ind+1, nums.end());
         }
     }
 };
