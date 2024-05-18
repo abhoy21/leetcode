@@ -1,51 +1,34 @@
 class Solution {
-private:
-    void func(int i, int j, vector<vector<char>>& grid,
-              vector<vector<int>>& vis, int n, int m) {
+public:
+    void dfs(vector<vector<char>>& grid, vector<vector<int>>& vis, int n, int m, int i,int j){
         vis[i][j] = 1;
-        queue<pair<int, int>> q;
-        q.push({i, j});
 
-        while (!q.empty()) {
-            int row, col;
-            tie(row, col) = q.front();
-            q.pop();
+        int dr[] = {0, 1, 0, -1};
+        int dc[] = {-1, 0, 1, 0};
 
-            // Check for horizontal and vertical movements only
-            int dr[] = {-1, 0, 1, 0};
-            int dc[] = {0, -1, 0, 1};
-
-            for (int d = 0; d < 4; d++) {
-                int nrow = row + dr[d];
-                int ncol = col + dc[d];
-                if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m &&
-                    grid[nrow][ncol] == '1' && vis[nrow][ncol] == 0) {
-                    vis[nrow][ncol] = 1;
-                    q.push({nrow, ncol});
-                }
+        for(int k = 0; k < 4; k++){
+            int newi = i + dr[k];
+            int newj = j + dc[k];
+           if (newi >= 0 && newi < n && newj >= 0 && newj < m) {
+                if (!vis[newi][newj] && grid[newi][newj] == '1')
+                    dfs(grid, vis, n, m, newi, newj);
             }
         }
     }
-
-public:
     int numIslands(vector<vector<char>>& grid) {
-        if (grid.empty() || grid[0].empty()) {
-            return 0;
-        }
-
         int n = grid.size();
         int m = grid[0].size();
+        int cnt = 0;
         vector<vector<int>> vis(n, vector<int>(m, 0));
-        int ans = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (grid[i][j] == '1' && vis[i][j] == 0) {
-                    ans++;
-                    func(i, j, grid, vis, n, m);
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < m; j++){
+                if(!vis[i][j] && grid[i][j] == '1'){
+                    cnt++;
+                    dfs(grid, vis, n, m, i, j);
                 }
             }
         }
 
-        return ans;
+        return cnt;
     }
 };
