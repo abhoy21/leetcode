@@ -1,35 +1,36 @@
 class Solution {
 public:
-    bool bfs(int i, vector<vector<int>> &graph, int color[], int n){
+    bool func(vector<vector<int>>& graph, int colors[], int n, int i){
         queue<int> q;
         q.push(i);
-        color[i] = 0;
-
+        colors[i] = 0;
+        
         while(!q.empty()){
-            int node = q.front();
+            int curr = q.front();
             q.pop();
-            for(auto temp : graph[node]){
-                if(color[temp] == -1){
-                    color[temp] = !color[node];
-                    q.push(temp);
+
+            for(auto adj: graph[curr]){
+                if(colors[adj] == -1){
+                    colors[adj] = !colors[curr];
+                    q.push(adj);
                 }
-                else if(color[temp] == color[node])
+                else if(colors[adj] == colors[curr]){
                     return false;
+                }
             }
         }
-
         return true;
     }
     bool isBipartite(vector<vector<int>>& graph) {
         int n = graph.size();
         int m = graph[0].size();
-        int color[n];
+        int colors[n];
         for(int i = 0; i < n; i++)
-            color[i] = -1;
+            colors[i] = -1;
         
-        for(int i = 0; i < n; i++){
-            if(color[i] == -1){
-                if(bfs(i, graph, color, n) == false)
+        for(int i= 0; i < n; i++){
+            if(colors[i] == -1){
+                if(func(graph, colors, n, i) == false)
                     return false;
             }
         }
